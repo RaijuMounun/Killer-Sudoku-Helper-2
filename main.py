@@ -1,13 +1,8 @@
-""" This is the main file for killer sudoku helper project. """
-import tkinter as tk
+""" Main file to run the Killer Sudoku helper. """
 import customtkinter as ctk
+from ui import KillerSudokuUI
 
-
-root = ctk.CTk()
-root.title("Killer Sudoku Helper")
-
-
-
-
-
-root.mainloop()
+if __name__ == "__main__":
+    root = ctk.CTk()
+    app = KillerSudokuUI(root)
+    root.mainloop()
