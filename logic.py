@@ -13,22 +13,19 @@ def calculate_cage_possibilities(
     if all_combos is None:
         all_combos = []
 
-    # Kombinasyon tamamlandığında kontrol et
+    # Combination is complete
     if len(current_combo) == int(cage_size_):
         if sum(current_combo) == int(target_sum):
             all_combos.append(tuple(current_combo))
         return
 
-    # Kombinasyonları oluştur
+    # Make the combinations
     for i in range(start, 10):
-        # Kısmi toplam kontrolü
         if sum(current_combo) + i > int(target_sum):
-            break  # Toplam hedefi aştı, devam etme
-        # Sayıyı kombinasyona ekle
+            break
         current_combo.append(i)
-        # Rekürsif olarak devam et
         calculate_cage_possibilities(target_sum, cage_size_, i + 1, current_combo, all_combos)
-        # Backtracking: Sayıyı kombinasyondan çıkar
+        # Backtracking: remove the last element
         current_combo.pop()
 
     return all_combos
