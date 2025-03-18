@@ -14,15 +14,15 @@ def calculate_cage_possibilities(
         all_combos = []
 
     # Kombinasyon tamamlandığında kontrol et
-    if len(current_combo) == cage_size_:
-        if sum(current_combo) == target_sum:
+    if len(current_combo) == int(cage_size_):
+        if sum(current_combo) == int(target_sum):
             all_combos.append(tuple(current_combo))
         return
 
     # Kombinasyonları oluştur
     for i in range(start, 10):
         # Kısmi toplam kontrolü
-        if sum(current_combo) + i > target_sum:
+        if sum(current_combo) + i > int(target_sum):
             break  # Toplam hedefi aştı, devam etme
         # Sayıyı kombinasyona ekle
         current_combo.append(i)
@@ -32,13 +32,3 @@ def calculate_cage_possibilities(
         current_combo.pop()
 
     return all_combos
-
-# Örnek kullanım
-CAGE_SUM = 12
-CAGE_SIZE = 3
-combinations = calculate_cage_possibilities(CAGE_SUM, CAGE_SIZE)
-
-print(f"Kafes Toplamı: {CAGE_SUM}, Kafes Boyutu: {CAGE_SIZE}")
-print("Olası Kombinasyonlar:")
-for combo in combinations:
-    print(combo)

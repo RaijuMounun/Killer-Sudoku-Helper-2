@@ -7,7 +7,7 @@ class KillerSudokuUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Killer Sudoku Helper")
-        self.root.geometry("350x300")
+        self.root.geometry("350x350")
 
         self.frame_cage_calculator = ctk.CTkFrame(self.root, border_width=5)
         self.frame_cage_calculator.pack(fill="both", expand=True)
@@ -45,13 +45,49 @@ class KillerSudokuUI:
             command=self.on_calculate)
         self.button_calculate.pack(pady=20)
 
+        self.frame_output = ctk.CTkFrame(self.frame_cage_calculator, border_width=5)
+        self.frame_output.pack(fill="both", expand=True)
+
+        self.frame_output_text = ctk.CTkFrame(self.frame_output)
+        self.frame_output_text.grid(row=0, column=0)
+        self.label_output = ctk.CTkLabel(
+            self.frame_output_text,
+            text="Output",
+            font=("Arial", 14))
+        self.label_output.grid(pady=10, row=0, column=3)
+
+        self.label_output_column_one = ctk.CTkLabel(
+            self.frame_output,
+            text="",
+            font=("Arial", 14))
+        self.label_output_column_one.grid(row=1, column=0, padx=70)
+
+        self.label_output_column_two = ctk.CTkLabel(
+            self.frame_output,
+            text="",
+            font=("Arial", 14))
+        self.label_output_column_two.grid(row=1, column=1)
+
     def on_slider_change(self, value):
         """ Called when the slider value changes """
         slider_value = int(float(value))
         self.label_slider_value.configure(text=f"Cage Size: {slider_value}")
 
+    def print_possible_combinations(self, combinations):
+        """ Olası kombinasyonları ekrana yazdır """
+        self.label_output_column_one.configure(text="")
+        self.label_output_column_two.configure(text="")
+        for i, combo in enumerate(combinations):
+            if i % 2 == 0:
+                self.label_output_column_one.configure(
+                    text=self.label_output_column_one.cget("text") + f"{combo}\n")
+            else:
+                self.label_output_column_two.configure(
+                    text=self.label_output_column_two.cget("text") + f"{combo}\n")
+
     def on_calculate(self):
         """ Calculate butonuna tıklandığında çağrılır """
         cage_sum = self.input_cage_sum.get()
         cage_size = int(float(self.slider.get()))
-        calculate_cage_possibilities(cage_sum, cage_size)
+        combinations = calculate_cage_possibilities(cage_sum, cage_size)
+        self.print_possible_combinations(combinations)
