@@ -16,6 +16,7 @@ Killer Sudoku Helper is a Python application designed to assist players of Kille
 3. **Calculate Combinations:** Click the "Calculate" button. The program will calculate and display all possible combinations of numbers that fit the given cage size and sum at the bottom of the screen.
 
 ## Installation
+You can use the releases tab to download the exe.
 
 1. Clone the repository:
    ```bash
